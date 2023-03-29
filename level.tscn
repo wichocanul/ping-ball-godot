@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://dncmd3hlyk4m6"]
+
+[ext_resource type="PackedScene" uid="uid://ha2yr4f3h32c" path="res://player.tscn" id="1_6wpsc"]
+[ext_resource type="Script" path="res://level.gd" id="1_mqits"]
+[ext_resource type="Script" path="res://oponente.gd" id="2_a4ih5"]
+[ext_resource type="PackedScene" uid="uid://vqr13elsifi5" path="res://ball.tscn" id="2_r3bcd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d33ej"]
+size = Vector2(1920, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_34n6k"]
+size = Vector2(50, 1080)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_mqits")
+
+[node name="ParedSuperior" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParedSuperior"]
+position = Vector2(960, 25)
+shape = SubResource("RectangleShape2D_d33ej")
+
+[node name="ParedInferior" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParedInferior"]
+position = Vector2(960, 1055)
+shape = SubResource("RectangleShape2D_d33ej")
+
+[node name="ArcoPlayer" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArcoPlayer"]
+position = Vector2(-25, 540)
+shape = SubResource("RectangleShape2D_34n6k")
+
+[node name="ArcoOponente" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArcoOponente"]
+position = Vector2(1945, 540)
+shape = SubResource("RectangleShape2D_34n6k")
+
+[node name="Player" parent="." instance=ExtResource("1_6wpsc")]
+position = Vector2(50, 460)
+
+[node name="Oponente" parent="." instance=ExtResource("1_6wpsc")]
+position = Vector2(1850, 460)
+script = ExtResource("2_a4ih5")
+
+[node name="Ball" parent="." instance=ExtResource("2_r3bcd")]
+position = Vector2(956, 528)
+
+[connection signal="body_entered" from="ArcoPlayer" to="." method="_on_arco_player_body_entered"]
+[connection signal="body_entered" from="ArcoOponente" to="." method="_on_arco_oponente_body_entered"]

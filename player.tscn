@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://ha2yr4f3h32c"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_aqjvv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3lp8c"]
+size = Vector2(20, 160)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_aqjvv")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 20.0
+offset_bottom = 160.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 80)
+shape = SubResource("RectangleShape2D_3lp8c")
